@@ -10,29 +10,57 @@
 <body>
 <input type="text" id="key" value="曾经的你"><button id="search">搜索</button>
 <hr>
-<ul id="list"></ul>
+<ol id="list"></ol>
+<hr>
+<div id="page"></div>
 <script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
 <script>
 (function () {
     var $key = $('#key'),
         $so = $('#search'),
-        $list = $('#list');
+        $list = $('#list'),
+        $page = $('#page');
 
-    $so.click(function() {
-        var word = $.trim($key.val());
+    function getData(key, pn) {
 
-        if(!word) {
+        $.getJSON('/search/' + key + '/' + pn, function(data) {
+
+            var body = '';
+            data.list.forEach(function (v, i) {
+                body +='<li><a target="_blank" href="download/'+ v.id +'">'+ v.name +'  '+ v.album +'  '+ v.singer +'<a></li>';
+            });
+
+            $list.html(body);
+            $page.html(data.page);
+
+        });
+    }
+
+    function search() {
+        var key = $.trim($key.val());
+
+        if(!key) {
             return;
         }
 
-        $.getJSON('/search/' + word, function(data) {
-            var body = '';
-            data.forEach(function (v, i) {
-                body +='<li><a target="_blank" href="download/'+ v.id +'">'+ v.id +' '+ v.name +'  '+ v.album +'  '+ v.singer +'<a></li>';
-            });
-            $list.html(body);
-        });
+        getData(key, 1);
+    }
+
+    $so.click(function () {
+        search();
     });
+
+    $key.keyup(function(event) {
+        if(event.keyCode === 13) {
+            search();
+        }
+    });
+
+    $page.on('click', 'a[data-option]', function () {
+        var option = $(this).data('option');
+        getData(option.key, option.pn);
+    });
+
 }.call(this));
 </script>
 </body>
