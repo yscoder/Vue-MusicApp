@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="renderer" content="webkit">
-<title><%=title %></title>
-</head>
-<body>
-<input type="text" id="key" value="曾经的你"><button id="search">搜索</button>
-<hr>
-<ol id="list"></ol>
-<hr>
-<div id="page"></div>
-<script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
-<script>
 (function () {
     var $key = $('#key'),
         $so = $('#search'),
@@ -27,7 +10,7 @@
 
             var body = '';
             data.list.forEach(function (v, i) {
-                body +='<li><a target="_blank" href="download/'+ v.id +'">'+ v.name +'  '+ v.album +'  '+ v.singer +'</a></li>';
+                body +='<li><a target="_blank" href="song/'+ v.id +'">'+ v.name +'  '+ v.album +'  '+ v.singer +'</a></li>';
             });
 
             $list.html(body);
@@ -62,6 +45,3 @@
     });
 
 }.call(this));
-</script>
-</body>
-</html>

@@ -12,9 +12,9 @@ module.exports = function(express) {
     var app = express();
 
     // view engine setup
-    app.engine('.html', ejs.__express);
-    app.set('views', path.join(__dirname, '../views'));
-    app.set('view engine', 'html');
+    //app.engine('.html', ejs.__express);
+    //app.set('views', path.join(__dirname, '../views'));
+    //app.set('view engine', 'html');
 
     // uncomment after placing your favicon in /public
     // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -24,9 +24,13 @@ module.exports = function(express) {
         extended: false
     }));
     app.use(cookieParser());
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, '../public')));
 
     routes(app);
+
+    app.get('/', function(req, res) {
+        res.sendFile(path.join(__dirname, '../public/index.html'));
+    });
 
     app.get('/favicon.ico', function(req, res) {
         res.status(404);

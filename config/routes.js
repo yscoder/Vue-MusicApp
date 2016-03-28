@@ -1,11 +1,10 @@
 var music = require('../controllers/music');
+var path = require('path');
 
 module.exports = function(app) {
 
-    app.get('/', music.index);
-
     app.get('/search/:key/:pn', music.search);
 
-    app.get('/download/:id', music.download);
+    app.get('/song/:id', music.download);
 
 };
