@@ -8,18 +8,20 @@
             width: 100%;
             height: 100%;
             max-height: 100%;
-            padding: 56px 0;
+            padding: 56px 0 55px;
             overflow-y: auto;
         }
 
         &list-item {
             line-height: 1.8;
             font-size: .16em;
+
             .container {
                 display: block;
                 padding: 8px 0;
                 border-bottom: 1px solid #ddd;
             }
+
             &:active {
                 background: #ccc
             }
