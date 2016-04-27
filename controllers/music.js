@@ -12,9 +12,9 @@ exports.search = function(req, res) {
 
 exports.download = function(req, res) {
 
-    kuwo.download(req.params.id).then(function (data) {
-        res.redirect(data);
-    }, function (e) {
+    kuwo.download(req.params.id).then(function(data) {
+        res.send(data);
+    }, function(e) {
         console.log(e);
     });
 

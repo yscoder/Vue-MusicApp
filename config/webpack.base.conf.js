@@ -21,33 +21,33 @@ module.exports = {
     fallback: [path.join(__dirname, '../node_modules')]
   },
   module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        include: projectRoot,
-        exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
-        test: /\.html$/,
-        loader: 'vue-html'
-      },
-      {
-        test: /\.(png|jpg|gif|svg|woff2?|eot|ttf)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: '[name].[ext]?[hash:7]'
-        }
+    loaders: [{
+      test: /\.vue$/,
+      loader: 'vue'
+    }, {
+      test: /\.(css|less)$/,
+      loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
+    }, {
+      test: /vux.src.*?js$/,
+      loader: 'babel'
+    }, {
+      test: /\.js$/,
+      loader: 'babel',
+      include: projectRoot,
+      exclude: /node_modules/
+    }, {
+      test: /\.json$/,
+      loader: 'json'
+    }, {
+      test: /\.html$/,
+      loader: 'vue-html'
+    }, {
+      test: /\.(png|jpg|gif|svg|woff2?|eot|ttf)(\?.*)?$/,
+      loader: 'url',
+      query: {
+        limit: 10000,
+        name: '[name].[ext]?[hash:7]'
       }
-    ]
+    }]
   }
 }
