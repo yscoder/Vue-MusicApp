@@ -1,40 +1,6 @@
-<style lang="less">
-    .m- {
-        &main {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            max-height: 100%;
-            padding: 56px 0 55px;
-            overflow-y: auto;
-        }
-
-        &list-item {
-            line-height: 1.8;
-            font-size: .16em;
-
-            .container {
-                display: block;
-                padding: 8px 0;
-                border-bottom: 1px solid #ddd;
-            }
-
-            &:active {
-                background: #ccc
-            }
-            .sub {
-                font-size: .14rem;
-                color: #727272;
-            }
-        }
-    }
-</style>
 <template>
-    <div class="m-main" id="main">
-        <ul class="m-list" id="list">
+    <div class="m-main">
+        <ul class="m-list" id="searchList" v-if="list">
             <li class="m-list-item" v-for="item in list">
                 <a href="javascript:;" class="container" @click="onItemClick(item)">
                     <div class="ellipsis">{{item.name}}</div>

@@ -1,8 +1,9 @@
+
 html {
     width: 100%;
     min-height: 100%;
     background-color: #fff;
-    color: #333;
+    color: @color-text;
     font-size: 100px;
     overflow-x: hidden;
 }
@@ -20,7 +21,7 @@ body {
 }
 
 body, input, button, textarea, select, option {
-  font: normal 1em 'Microsoft YaHei', 'helvetica neue', tahoma, sans-serif;
+  font: normal .14em 'Microsoft YaHei', 'helvetica neue', tahoma, sans-serif;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, figure, pre, dl, dd, blockquote, button, input {
@@ -54,10 +55,6 @@ img {
   width: 100%;
   max-width: 100%;
   border: none;
-}
-
-img, input, button, label {
-  vertical-align: middle;
 }
 
 em, i, address {
@@ -212,7 +209,10 @@ textarea {
           flex: 0 auto;
 }
 
-.container {
-  margin-left: 16px;
-  margin-right: 16px;
+.container, .mr-both {
+  margin-left: @g-margin;
+  margin-right: @g-margin;
 }
+
+.ml { margin-left: @g-margin}
+.mr { margin-right: @g-margin}

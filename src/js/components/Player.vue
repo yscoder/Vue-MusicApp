@@ -1,46 +1,3 @@
-<style lang="less">
-    .m- {
-        &player {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            z-index: 10;
-            width: 100%;
-            height: 56px;
-            background: #fff;
-            border-top: 1px solid #ddd;
-            .container {
-                margin-top: 8px;
-                margin-bottom: 8px;
-            }
-        }
-
-        &pic-s {
-            width: 40px;
-            height: 40px;
-            margin-right: 16px;
-            border-radius: 50%;
-            overflow: hidden;
-            img {
-                vertical-align: top
-            }
-        }
-
-        &txt {
-            font-size: .14em;
-            .singer {
-                color: #727272;
-            }
-        }
-
-        &act {
-            font-size: .14em;
-            color: #727272;
-            line-height: 40px;
-
-        }
-    }
-</style>
 <template>
     <div class="m-player" id="player">
         <div class="container flex-row">
@@ -52,8 +9,9 @@
                 <p class="singer">{{song.singer}}</p>
             </div>
             <div class="m-act">
-                <span @click="play()">播放</span>
-                <span @click="next()">下一首</span>
+                <span @click="mode()" class="icon icon-lg m-btn icon-mode-random"></span>
+                <span @click="play()" class="icon icon-lg m-btn icon-play "></span>
+                <span @click="next()" class="icon icon-lg m-btn icon-next "></span>
             </div>
             <audio autoplay v-el="music">
               <source type="audio/mpeg" :src="song.url" v-if="song.url">
@@ -72,6 +30,9 @@ module.exports = {
         },
         next: function () {
             // next
+        },
+        mode: function () {
+            // body...
         }
     },
     computed: {
