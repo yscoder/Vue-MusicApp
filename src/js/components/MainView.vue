@@ -19,9 +19,7 @@ module.exports = {
         playList: Array
     },
     methods: {
-        'add-song': function (item) {
-            this.song = item;
-        }
+        
     }
 
 };

@@ -200,7 +200,8 @@
 }
 
 .fade-in-left-transition,
-.fade-out-left-transition {
+.fade-out-left-transition,
+.fade-in-bottom-transition {
     transition: all .4s ease;
 }
 
@@ -214,4 +215,9 @@
 .fade-out-left-leave {
     transform: translate3d(-100%, 0, 0);
     box-shadow: none;
+}
+
+.fade-in-bottom-enter,
+.fade-in-bottom-leave {
+    transform: translate3d(0, 100%, 0);
 }

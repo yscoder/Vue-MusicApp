@@ -3,6 +3,7 @@ var kuwo = require('../models/kuwo');
 exports.search = function(req, res) {
 
     kuwo.search(req.params).then(function(data) {
+        
         res.send(data);
     }, function(e) {
         console.log(e);

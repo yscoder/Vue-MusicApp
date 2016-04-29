@@ -2,7 +2,7 @@
     <div class="m-main" id="main">
         <ol class="m-list" id="playList" v-if="playList">
             <li class="m-list-item m-play-item" v-for="item in playList" data-index="{{$index + 1}}">
-                <a href="javascript:;" class="container ratina-bd bd-b" @click="play(item)">
+                <a href="javascript:;" class="container ratina-bd bd-b" @click="play($index)">
                     <div class="ellipsis">{{item.name}}</div>
                     <div class="ellipsis sub">
                         {{item.singer}} - {{item.album||'未知专辑'}}
@@ -20,15 +20,8 @@ module.exports = {
         playList: Array
     },
     methods: {
-        play: function (item) {
-            this.$http.get('/song/' + item.id).then(function (res) {
-                console.log('url:' + res.data);
-                item.url = res.data;
-                this.$dispatch('click-item', item);
-
-            }, function (res) {
-                console.error('error: ' + res.status);
-            });
+        play: function (index) {
+            this.$dispatch('cut-song', index);
         },
         contextMenu: function (item) {
             console.log('more')

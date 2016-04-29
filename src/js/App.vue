@@ -4,7 +4,7 @@
 <template>
     <div id="app">
         <router-view :play-list="playList"></router-view>
-        <music-ctrl :songIndex="songIndex" :play-list="playList"></music-ctrl>
+        <music-ctrl :song-index="songIndex" :play-list="playList"></music-ctrl>
     </div>
 </template>
 
@@ -35,6 +35,11 @@ module.exports = {
         'add-song': function (song) {
             this.pushSong(song);
             console.log(this.playList)
+        },
+        'cut-song': function(index) {
+            console.log('cut:' + index);
+            // this.songIndex = index;
+            this.$broadcast('cut-play', index);
         }
     }
 
