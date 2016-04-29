@@ -1,8 +1,8 @@
 <template>
     <header id="m-hd" class="m-hd">
         <div class="flex-row container">
-            <div class="m-logo"><span class="icon icon-music icon-2x"></span></div>
-            <div class="flex-col mr-both ellipsis">Just Music</div>
+            <div class="m-logo mr-both"><span class="icon icon-music icon-2x"></span></div>
+            <div class="flex-col ellipsis">Just Music</div>
             <div>
                 <span class="icon m-btn icon-search icon-2x" v-link="{ path: '/search' }"></span>
                 <span class="icon m-btn icon-more icon-2x"></span>

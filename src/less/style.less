@@ -1,17 +1,19 @@
 @import 'variable';
 @import 'base';
 @import 'icon';
+@import '1px';
 
 .@{namespace}- {
     &btn {
-        padding: 0 10px;
-        border-radius: 4px;
+        padding: 0 @g-margin;
+        text-align: center;
+        box-sizing: content-box;
+        border-radius: @border-radius-size;
         &:active {
             background: @color-active-bg;
         }
         &.icon {
-            padding: 0;
-            width: 40px;
+            width: 20px;
             text-align: center;
         }
     }
@@ -26,10 +28,10 @@
         color: #fff;
         background: @color-primary;
         font-size: .16rem;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 
         .container {
-            margin-top: 10px;
-            margin-bottom: 10px;
+            margin: 10px 0;
             height: 36px;
             line-height: 36px;
         }
@@ -57,6 +59,17 @@
         color: #fff;
         font-size: .16rem;
         transition: width .3s;
+
+        &-wrap {
+            position: relative;
+        }
+
+        &-icon {
+            position: absolute;
+            top: 1px;
+            left: 6px;
+            color: #73BB6E;
+        }
     }
     &so {
         color: #C8E6C9;
@@ -71,10 +84,9 @@
         width: 100%;
         height: 56px;
         background: #fff;
-        border-top: 1px solid @color-border;
+
         .container {
-            margin-top: 8px;
-            margin-bottom: 8px;
+            margin: 8px 0;
         }
     }
 
@@ -111,6 +123,7 @@
         max-height: 100%;
         padding: 56px 0 55px;
         overflow-y: auto;
+        background: #fcfcfc;
     }
 
     &list-item {
@@ -119,8 +132,8 @@
 
         .container {
             display: block;
-            padding: 8px 0;
-            border-bottom: 1px solid @color-border;
+            height: 56px;
+            line-height: 56px;
         }
 
         &:active {
@@ -131,14 +144,74 @@
         }
     }
 
+    &play-item {
+        position: relative;
+
+        &:after {
+            position: absolute;
+            top: 0;
+            left: @g-margin;
+            content: attr(data-index);
+            width: 20px;
+            line-height: 62px;
+            text-align: center;
+            font-size: .24rem;
+            color: @color-gray;
+        }
+
+        .container {
+            margin-left: 52px;
+            margin-right: 0;
+            padding: 8px 52px 8px 0;
+            height: auto;
+            line-height: 1.7;
+            font-size: .15rem;
+        }
+        .sub {
+             font-size: .12rem;
+        }
+        .icon-more {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 14px;
+            line-height: 62px;
+            color: @color-gray;
+            &:active {
+                background: none;
+            }
+        }
+    }
+
 }
 
-.fade-in-left-transition {
+.progress-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    height: 3px;
+    background: @color-primary-light;
+
+    &.primary {
+        background: @color-primary-dark;
+        z-index: 2;
+    }
+}
+
+.fade-in-left-transition,
+.fade-out-left-transition {
     transition: all .4s ease;
-    opacity: 1;
 }
 
-.fade-in-left-enter, .fade-in-left-leave {
+.fade-in-left-enter,
+.fade-in-left-leave {
     transform: translate3d(100%, 0, 0);
-    opacity: 0;
+    box-shadow: none;
+}
+
+.fade-out-left-enter,
+.fade-out-left-leave {
+    transform: translate3d(-100%, 0, 0);
+    box-shadow: none;
 }

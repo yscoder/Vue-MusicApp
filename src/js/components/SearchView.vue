@@ -11,17 +11,18 @@
     }
 </style>
 <template>
-    <div class="search-view" transition="fade-in-left" transition-mode="in-out">
+    <div class="search-view" id="search-view" transition="fade-in-left" transition-mode="out-in">
         <header id="search-hd" class="m-hd">
             <div class="flex-row container">
                 <span class="m-btn icon icon-2x icon-prev" v-link="{ path: '/' }"></span>
-                <div class="flex-col mr-both">
+                <div class="flex-col mr-both m-key-wrap">
+                    <span class="icon icon-search icon-lg m-key-icon"></span>
                     <input type="text" class="m-key" v-model="key" placeholder="歌名 艺人 专辑">
                 </div>
                 <button type="button" class="m-btn" @click="search">搜索</button>
             </div>
         </header>
-        <search-list :list="list" v-on:click-item="clickItem"></search-list>
+        <search-list :search-list="searchList"></search-list>
     </div>
 
 </template>
@@ -33,17 +34,7 @@ module.exports = {
     data: function () {
         return {
             key: '曾经的你',
-            list: [{
-                id: 237910,
-                name: '曾经的你',
-                singer: '许巍',
-                album: '未知'
-            }],
-            song: {
-                id: 237910,
-                name: '曾经的你',
-                singer: '许巍'
-            }
+            searchList: []
         }
     },
     components: {
@@ -60,14 +51,11 @@ module.exports = {
 
             this.$http.get('/search/' + this.key + '/1').then(function(res){
 
-                this.list = res.data.list;
+                this.searchList = res.data.list;
 
             }, function (res) {
                 console.error('error: ' + res.status);
             });
-        },
-        clickItem: function (item) {
-            this.song = item;
         }
     }
 };

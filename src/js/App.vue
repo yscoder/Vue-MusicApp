@@ -2,39 +2,39 @@
 @import '../less/style';
 </style>
 <template>
-    <div id="app" class="index-view">
-        <music-header v-on:fetch-list="fetchList"></music-header>
-        <play-list :list="list" v-on:click-item="clickItem"></play-list>
-        <music-ctrl :song="song"></music-ctrl>
+    <div id="app">
+        <router-view :play-list="playList"></router-view>
+        <music-ctrl :songIndex="songIndex" :play-list="playList"></music-ctrl>
     </div>
-
-    <router-view></router-view>
 </template>
 
 <script>
-var Header = require('./components/Header');
 var Player = require('./components/Player');
-var List = require('./components/PlayList');
 
 module.exports = {
     components: {
-        'music-header': Header,
-        'music-ctrl': Player,
-        'play-list': List
+        'music-ctrl': Player
     },
     data: function () {
         return {
-            list: [],
-            song: {
-                id: 237910,
-                name: '曾经的你',
-                singer: '许巍'
-            }
+            playList: [],
+            songIndex: 0
         }
     },
     methods: {
-        fetchList: function (data) {
-            this.list = data;
+        pushSong: function (song) {
+            // 过滤：不添加已存在的项
+            var index = 0;
+            !this.playList.some(function (item, i) {
+                index = i;
+                return item.id === song.id;
+            }) && (this.playList.push(song), this.songIndex = index);
+        }
+    },
+    events: {
+        'add-song': function (song) {
+            this.pushSong(song);
+            console.log(this.playList)
         }
     }
 

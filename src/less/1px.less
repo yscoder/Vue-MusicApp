@@ -1,0 +1,172 @@
+/**
+* https://github.com/yscoder/border-1px
+*/
+.border-scale(@s) {
+    -webkit-transform: scale(@s);
+    transform: scale(@s);
+}
+.border-postion(@x, @y) {
+    -webkit-transform-origin: @x @y;
+    transform-origin: @x @y;
+}
+
+.bd() {
+    border-width: 0;
+    border-color: @color-border;
+    border-style: solid;
+}
+
+.ratina-bd(@dpr) {
+
+    &::before {
+        width: 100% * @dpr;
+        height: 100% * @dpr;
+        .border-scale(1/@dpr);
+    }
+}
+
+.bd-t {
+    .bd;
+    border-top-width: 1px;
+}
+.bd-r {
+    .bd;
+    border-right-width: 1px;
+}
+.bd-b {
+    .bd;
+    border-bottom-width: 1px;
+}
+.bd-l {
+    .bd;
+    border-left-width: 1px;
+}
+.bd-all {
+    .bd;
+    border-width: 1px;
+}
+.bd-radius {
+    .bd-all;
+    border-radius: @border-radius-size;
+}
+.bd-dashed {
+    border-style: dashed!important;
+}
+
+hr {
+    border: none;
+}
+hr,
+.hr {
+    margin: .7em 0;
+    width: 100%;
+    height: 1px;
+    background: @color-border;
+    overflow: hidden;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+    .ratina-bd {
+        position: relative;
+        border: none!important;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            .bd;
+            .border-postion(0, 0);
+            pointer-events: none;
+        }
+
+        .ratina-bd(1.5);
+
+        &.bd-t {
+            &::before {
+                border-top-width: 1px;
+            }
+        }
+
+        &.bd-r {
+            &::before {
+                border-right-width: 1px;
+            }
+        }
+
+        &.bd-b {
+            &::before {
+                border-bottom-width: 1px;
+            }
+        }
+
+        &.bd-l {
+            &::before {
+                border-left-width: 1px;
+            }
+        }
+
+        &.bd-all {
+            &::before {
+                border-width: 1px;
+            }
+        }
+
+        &.bd-radius {
+            &::before {
+                border-width: 1px;
+                border-radius: @border-radius-size * 1.5;
+            }
+        }
+
+        &.bd-dashed {
+            &::before {
+                border-style: dashed!important;
+            }
+        }
+
+    }
+
+    hr,
+    .hr {
+        width: 100% * 1.5;
+        .border-scale(1/1.5);
+        .border-postion(0, 0);
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+    .ratina-bd {
+        .ratina-bd(2);
+
+        &.bd-radius {
+            &::before {
+                border-radius: @border-radius-size * 2;
+            }
+        }
+    }
+
+    hr,
+    .hr {
+        width: 100% * 2;
+        .border-scale(1/2);
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+    .ratina-bd {
+        .ratina-bd(3);
+
+        &.bd-radius {
+            &::before {
+                border-radius: @border-radius-size * 3;
+            }
+        }
+    }
+
+    hr,
+    .hr {
+        width: 100% * 3;
+        .border-scale(1/3);
+    }
+}

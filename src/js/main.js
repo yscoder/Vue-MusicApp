@@ -8,9 +8,13 @@ Vue.use(VueRouter);
 var router = new VueRouter({
     transitionOnLoad: true
 });
-var Search = require('./components/Search');
+var Search = require('./components/SearchView');
+var Main = require('./components/MainView');
 
 router.map({
+    '/': {
+        component: Main
+    },
     '/search': {
         component: Search
     }

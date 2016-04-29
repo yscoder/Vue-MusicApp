@@ -1,12 +1,9 @@
 <template>
     <div class="m-main">
-        <ul class="m-list" id="searchList" v-if="list">
-            <li class="m-list-item" v-for="item in list">
-                <a href="javascript:;" class="container" @click="onItemClick(item)">
-                    <div class="ellipsis">{{item.name}}</div>
-                    <div class="ellipsis tr sub">
-                        {{item.singer}} - {{item.album||'未知专辑'}}
-                    </div>
+        <ul class="m-list" id="searchList" v-if="searchList">
+            <li class="m-list-item" v-for="item in searchList" >
+                <a href="javascript:;" class="container ratina-bd bd-b" @click="onItemClick(item)">
+                    <div class="ellipsis">{{item.name}} - {{item.singer}}</div>
                 </a>
             </li>
         </ul>
@@ -15,15 +12,16 @@
 <script>
 
 module.exports = {
+
     props: {
-        list: Array
+        searchList: Array
     },
     methods: {
         onItemClick: function (item) {
             this.$http.get('/song/' + item.id).then(function (res) {
                 console.log('url:' + res.data);
                 item.url = res.data;
-                this.$dispatch('click-item', item);
+                this.$dispatch('add-song', item);
 
             }, function (res) {
                 console.error('error: ' + res.status);
