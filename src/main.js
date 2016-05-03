@@ -1,4 +1,4 @@
-var Vue = require('Vue');
+var Vue = require('vue');
 var VueRouter = require('vue-router');
 var App = require('./components/App');
 var Search = require('./components/SearchView');
