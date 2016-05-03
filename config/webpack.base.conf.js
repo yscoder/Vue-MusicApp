@@ -3,11 +3,11 @@ var projectRoot = path.resolve(__dirname, '../');
 
 module.exports = {
   entry: {
-    app: './src/js/main.js'
+    app: './src/main.js'
   },
   output: {
-    path: path.resolve(__dirname, '../public/js'),
-    publicPath: './js/',
+    path: path.resolve(__dirname, '../public/'),
+    // publicPath: './public/',
     filename: '[name].js'
   },
   resolve: {

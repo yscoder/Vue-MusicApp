@@ -10,17 +10,17 @@ var spinner = ora('building for production...')
 spinner.start()
 
 rm('-rf', 'public')
-mkdir('dist')
-cp('-R', 'src', conf.output.path)
+mkdir('public')
+// cp('-R', 'src', conf.output.path)
 
-webpack(conf, function (err, stats) {
-  spinner.stop()
-  if (err) throw err
-  process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false
-  }) + '\n')
+webpack(conf, function(err, stats) {
+    spinner.stop()
+    if (err) throw err
+    process.stdout.write(stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false
+    }) + '\n')
 })

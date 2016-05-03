@@ -9,7 +9,7 @@
 </template>
 
 <script>
-var Player = require('./components/Player');
+var Player = require('./Player');
 
 module.exports = {
     components: {

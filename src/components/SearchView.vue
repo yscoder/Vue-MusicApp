@@ -16,10 +16,11 @@
             <div class="flex-row container">
                 <span class="m-btn icon icon-2x icon-prev" v-link="{ path: '/' }"></span>
                 <div class="flex-col mr-both m-key-wrap">
-                    <span class="icon icon-search icon-lg m-key-icon"></span>
+
                     <input type="text" class="m-key" v-model="key" placeholder="歌名 艺人 专辑">
+                    <span class="icon icon-search icon-2x m-key-icon" @click="search"></span>
                 </div>
-                <button type="button" class="m-btn" @click="search">搜索</button>
+                <!-- <button type="button" class="m-btn" @click="search">搜索</button> -->
             </div>
         </header>
         <search-list :search-list="searchList"></search-list>
