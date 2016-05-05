@@ -1,7 +1,7 @@
 <template>
     <div class="main-view" id="main-view" transition="fade-out-left" transition-mode="in-out">
         <music-header></music-header>
-        <play-list :play-list="playList" ></play-list>
+        <play-list></play-list>
     </div>
 
 </template>
@@ -14,14 +14,7 @@ module.exports = {
     components: {
         'music-header': Header,
         'play-list': List
-    },
-    props: {
-        playList: Array
-    },
-    methods: {
-
     }
-
 };
 
 </script>

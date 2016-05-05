@@ -1,40 +1,22 @@
 <template>
     <header id="m-hd" class="m-hd">
-        <div class="flex-row container">
-            <div class="m-logo mr-both"><span class="icon icon-music icon-2x"></span></div>
+        <div class="flex-row">
+            <a href="http://www.imys.net" target="_blank" class="m-hd-icon" v-waves.circle>
+                <i class="icon icon-music icon-lg"></i>
+            </a>
             <div class="flex-col ellipsis">Just Music</div>
-            <div>
-                <span class="icon m-btn icon-search icon-2x" v-link="{ path: '/search' }"></span>
-                <span class="icon m-btn icon-more icon-2x"></span>
-            </div>
+            <a href="javascript:;" class="m-hd-icon" v-link="{ path: '/search' }" v-waves.circle>
+                <i class="icon icon-search icon-lg"></i>
+            </a>
+            <a href="javascript:;" class="m-hd-icon" v-waves.circle>
+                <i class="icon icon-more icon-lg"></i>
+            </a>
         </div>
     </header>
 </template>
 
 <script>
 module.exports = {
-    data: function () {
-        return {
-            key: '曾经的你'
-        }
-    },
-    methods: {
-        search: function () {
 
-            if(!this.key.trim()) {
-                return;
-            }
-
-            console.log(this.key);
-
-            this.$http.get('/search/' + this.key + '/1').then(function(res){
-
-                this.$dispatch('fetch-list', res.data.list);
-
-            }, function (res) {
-                console.error('error: ' + res.status);
-            });
-        }
-    }
 };
 </script>

@@ -1,19 +1,25 @@
 <template>
     <div class="m-player ratina-bd bd-t" id="player" v-if="currentSong" transition="fade-in-bottom">
-        <div class="container">
-            <div class="m-pic-s mr-both fl">
-                <img src="http://placeholder.qiniudn.com/40x40/ccc/fff">
+        <div class="">
+            <div class="m-pic-s fl">
+                <img src="http://placeholder.qiniudn.com/56x56/ccc/fff" v-waves.block>
             </div>
-            <div class="m-act fr">
-                <span @click="mode" class="icon icon-lg m-btn" :class="'icon-mode-' + playMode.list[playMode.index]"></span>
-                <span @click="play" class="icon icon-lg m-btn" :class="[playState ? 'icon-pause' : 'icon-play']"></span>
-                <span @click="next" class="icon icon-lg m-btn icon-next "></span>
+            <div class="m-act flex-row fr">
+                <button class="flex-col" @click="mode" v-waves.circle>
+                    <i class="icon icon-lg" :class="'icon-mode-' + modeIcon"></i>
+                </button>
+                <button class="flex-col" @click="play" v-waves.circle>
+                    <i class="icon icon-lg" :class="[playState ? 'icon-pause' : 'icon-play']"></i>
+                </button>
+                <button class="flex-col" @click="next" v-waves.circle>
+                    <i class="icon icon-lg icon-next "></i>
+                </button>
             </div>
             <div class="m-txt oh">
                 <div class="song ellipsis">{{currentSong ? currentSong.name : ''}}</div>
                 <div class="singer ellipsis">{{currentSong ? currentSong.singer : ''}}</div>
             </div>
-            
+
             <audio autoplay v-el:music  @play="playStateChange" @pause="playStateChange" @ended="playEnded"  @progress="progress" @timeupdate="timeupdate">
               <source type="audio/mpeg" :src="currentSong.url" v-if="currentSong">
             </audio>
@@ -23,73 +29,68 @@
 </template>
 <script>
 var ProgressLine = require('./ProgressLine');
+var NextSong = require('../store/actions').NextSong;
 
 module.exports = {
     data: function(){
         return {
-            playState: false,
-            playMode: {
-                index: 0,
-                list: ['loop', 'single', 'random']
-            },
+            playMode: 0,
             running: 0,
-            total: 0
+            total: 0,
+            playState: false
         }
     },
     components: {
         'progress-line': ProgressLine
     },
-    props: {
-        songIndex: Number,
-        playList: Array
+    vuex: {
+        getters: {
+            currentSong: function (state) {
+                // console.log()
+                return state.playList[state.songIndex];
+            }
+        },
+        actions: {
+            nextSong: NextSong
+        }
     },
     methods: {
         play: function () {
             // play or pause
-            this.playState = !this.playState;
-            (this.playList[this.songIndex] && this.playState) ? this.$els.music.play() : this.$els.music.pause();
+            this.playState ? this.$els.music.pause() : this.$els.music.play();
         },
         next: function () {
             // next
             // 根据 playMode 切换下一首
-            var len = this.playList.length,
-                index = this.songIndex;
+            var $music = this.$els.music;
 
-            // 取消循环播放
-            this.$els.music.loop = false;
+            $music.pause();
+            $music.src = '';
 
-            switch(this.playMode.index) {
-                case 0:
-                    // 顺序
-                    index = this.songIndex + 1 === len ? 0 : this.songIndex + 1;
-                    break;
-                case 2:
-                    // 随机
-                    index = Math.floor((Math.random() * (len - 1)) + 1);
-                    break;
-                default:
-                    // 单曲循环
-                    this.$els.music.loop = true;
-                    break;
-            }
-            console.log('playIndex:' + index)
-            this.playByIndex(index);
-            
+            console.log('mode:' + this.playMode);
+            this.nextSong(this.playMode);
+
+            $music.src = this.currentSong.url;
+            $music.play();
         },
         mode: function () {
             // playMode
-            var cur = this.playMode.index,
-                len = this.playMode.list.length;
-            this.playMode.index = cur + 1 === len ? 0 : cur + 1;
+            var cur = this.playMode;
+
+            this.playMode = cur + 1 === 3 ? 0 : cur + 1;
+
+            // playMode 为 1 设置循环播放
+            this.$els.music.loop = this.playMode === 1;
         },
         playEnded: function () {
             // 播放结束直接调用下一首
             console.log('next');
             this.next();
         },
-        playStateChange: function () {
+        playStateChange: function (e) {
             // 播放状态改变
-            this.playState = !this.$els.music.paused;
+            console.log(e.type);
+            this.playState = e.type === 'play';
         },
         progress: function () {
             // 缓冲
@@ -97,9 +98,9 @@ module.exports = {
             // duration 资源长度
             var $music = this.$els.music,
                 buffered = $music.buffered;
-            
+
             if(!buffered.length) return;
-            
+
             this.total = Math.round(buffered.end(buffered.length - 1) / $music.duration * 100);
 
         },
@@ -108,28 +109,12 @@ module.exports = {
             // played 已播放长度
             var $music = this.$els.music;
             this.running = Math.round($music.currentTime / $music.duration * 100);
-        },
-        playByIndex: function(index) {
-            this.songIndex = index;
-            this.$els.music.src = this.playList[this.songIndex].url;
         }
     },
     computed: {
-        songUrl: {
-            get: function () {
-                return this.song.url;
-            },
-            set: function (song) {
-                this.song = song;
-            }
-        },
-        currentSong: function() {
-            return this.playList[this.songIndex];
-        }
-    },
-    events: {
-        'cut-play': function(index) {
-            this.playIndex !== index && this.playByIndex(index);
+
+        modeIcon: function () {
+            return ['loop', 'single', 'random'][this.playMode];
         }
     }
 };

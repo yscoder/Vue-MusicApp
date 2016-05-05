@@ -13,14 +13,16 @@
 <template>
     <div class="search-view" id="search-view" transition="fade-in-left" transition-mode="out-in">
         <header id="search-hd" class="m-hd">
-            <div class="flex-row container">
-                <span class="m-btn icon icon-2x icon-prev" v-link="{ path: '/' }"></span>
-                <div class="flex-col mr-both m-key-wrap">
-
+            <div class="flex-row">
+                <a href="javascript:;" class="m-hd-icon" v-link="{ path: '/' }" v-waves.circle>
+                    <i class="icon icon-lg icon-prev"></i>
+                </a>
+                <div class="flex-col m-key-wrap">
                     <input type="text" class="m-key" v-model="key" placeholder="歌名 艺人 专辑">
-                    <span class="icon icon-search icon-2x m-key-icon" @click="search"></span>
+                    <a href="javascript:;" class="m-key-icon" @click="search" v-waves.circle>
+                        <i class="icon icon-search icon-lg"></i>
+                    </a>
                 </div>
-                <!-- <button type="button" class="m-btn" @click="search">搜索</button> -->
             </div>
         </header>
         <search-list :search-list="searchList"></search-list>

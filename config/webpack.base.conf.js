@@ -26,7 +26,7 @@ module.exports = {
       loader: 'vue'
     }, {
       test: /\.(css|less)$/,
-      loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
+      loader: 'style-loader!css-loader!less-loader'
     }, {
       test: /vux.src.*?js$/,
       loader: 'babel'
