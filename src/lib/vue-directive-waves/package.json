@@ -1,0 +1,25 @@
+{
+  "name": "vue-directive-waves",
+  "version": "0.0.1",
+  "description": "Use the wave effect in vue.",
+  "keywords": [
+    "vue",
+    "waves"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "yusen",
+    "email": "yusen.9215@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yscoder/vue-directive-waves.git"
+  },
+  "dependencies": {
+    "node-waves": "^0.7.5"
+  }
+}

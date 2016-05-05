@@ -1,5 +1,6 @@
 var path = require('path');
 var projectRoot = path.resolve(__dirname, '../');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -26,7 +27,7 @@ module.exports = {
       loader: 'vue'
     }, {
       test: /\.(css|less)$/,
-      loader: 'style-loader!css-loader!less-loader'
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
     }, {
       test: /vux.src.*?js$/,
       loader: 'babel'

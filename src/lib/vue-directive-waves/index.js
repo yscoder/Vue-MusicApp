@@ -1,5 +1,5 @@
-require('style!../lib/waves/waves.css');
-var Waves = require('../lib/waves');
+require('node-waves/dist/waves.css');
+var Waves = require('node-waves');
 
 module.exports = function(Vue, option) {
 
