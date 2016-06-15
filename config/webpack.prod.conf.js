@@ -17,7 +17,6 @@ module.exports = merge(baseConfig, {
     chunkFilename: '[id].[chunkhash].js'
   },
   plugins: [
-    // http://vuejs.github.io/vue-loader/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
