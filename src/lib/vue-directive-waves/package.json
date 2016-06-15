@@ -4,7 +4,8 @@
   "description": "Use the wave effect in vue.",
   "keywords": [
     "vue",
-    "waves"
+    "waves",
+    "directive"
   ],
   "main": "index.js",
   "scripts": {
