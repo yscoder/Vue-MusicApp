@@ -1,20 +1,20 @@
 <template>
-    <div class="main-view" id="main-view" transition="fade-out-left" transition-mode="in-out">
-        <music-header></music-header>
-        <play-list></play-list>
-    </div>
-
+    <transition name="fade-out-left" mode="in-out">
+        <div class="main-view" id="main-view">
+            <m-header></m-header>
+            <play-list></play-list>
+        </div>
+    </transition>
 </template>
 
 <script>
-var Header = require('./Header');
-var List = require('./PlayList');
+import Header from './Header'
+import List from './PlayList'
 
-module.exports = {
+export default {
     components: {
-        'music-header': Header,
-        'play-list': List
+        mHeader: Header,
+        playList: List
     }
-};
-
+}
 </script>

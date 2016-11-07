@@ -10,31 +10,23 @@
     </div>
 </template>
 <script>
-var AddPlayList = require('../store/actions').addPlayList;
-
-module.exports = {
-
+export default {
     props: {
         searchList: Array
     },
-    vuex: {
-        actions: {
-            addSong: AddPlayList
-        }
-    },
     methods: {
-        onItemClick: function (item) {
-            this.$http.get('/song/' + item.id).then(function (res) {
+        onItemClick (item) {
+            this.$http.get('/song/' + item.id).then(res => {
                 console.log('url:' + res.data);
                 item.url = res.data;
 
-                this.addSong(item);
+                this.$store.dispatch('addPlayList', item)
 
-            }, function (res) {
+            }, res => {
                 console.error('error: ' + res.status);
             });
 
         }
     }
-};
+}
 </script>

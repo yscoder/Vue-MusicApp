@@ -9,14 +9,14 @@
 </template>
 
 <script>
-var Player = require('./Player');
-var store = require('../store');
+import Player from './Player'
+import store from '../store'
 
-module.exports = {
+export default {
     components: {
-        'music-ctrl': Player
+        musicCtrl: Player
     },
-    store: store
-};
+    store
+}
 
 </script>

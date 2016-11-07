@@ -3,10 +3,10 @@
 @import 'icon';
 @import '1px';
 
-.@{namespace}- {
+.@{namespace} {
 
     // header
-    &hd {
+    &-hd {
         position: absolute;
         top: 0;
         left: 0;
@@ -32,7 +32,7 @@
         }
 
     }
-    &key {
+    &-key {
         border: none;
         display: block;
         width: 100%;
@@ -59,12 +59,12 @@
             text-align: center;
         }
     }
-    &so {
+    &-so {
         color: #C8E6C9;
     }
 
     // player
-    &player {
+    &-player {
         position: absolute;
         left: 0;
         bottom: 0;
@@ -78,7 +78,7 @@
         }
     }
 
-    &pic-s {
+    &-pic-s {
         width: 56px;
         height: 56px;
         margin-right: @g-margin;
@@ -86,7 +86,7 @@
 
     }
 
-    &txt {
+    &-txt {
         padding: 8px 0;
         line-height: 1.6;
         .singer {
@@ -95,7 +95,7 @@
         }
     }
 
-    &act {
+    &-act {
 
         button {
             border: none;
@@ -108,7 +108,7 @@
     }
 
     // list
-    &main {
+    &-main {
         position: absolute;
         top: 0;
         left: 0;
@@ -121,7 +121,7 @@
         background: #fcfcfc;
     }
 
-    &list-item {
+    &-list-item {
         line-height: 1.8;
         font-size: .16rem;
 
@@ -136,7 +136,7 @@
         }
     }
 
-    &play-item {
+    &-play-item {
         position: relative;
 
         &:after {
@@ -184,9 +184,8 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 1;
     height: 3px;
-    background: @color-primary-light;
+    background: @color-border;
     transition: width 1s ease;
 
     &.primary {
@@ -195,26 +194,26 @@
     }
 }
 
-.fade-in-left-transition,
-.fade-out-left-transition,
-.fade-in-bottom-transition {
+.fade-in-left-enter-active,
+.fade-out-left-enter-active,
+.fade-in-bottom-enter-active {
     transition: all .4s ease;
 }
 
 .fade-in-left-enter,
-.fade-in-left-leave {
+.fade-in-left-leave-active {
     transform: translate3d(100%, 0, 0);
     box-shadow: none;
 }
 
 .fade-out-left-enter,
-.fade-out-left-leave {
+.fade-out-left-leave-active {
     transform: translate3d(-100%, 0, 0);
     box-shadow: none;
 }
 
 .fade-in-bottom-enter,
-.fade-in-bottom-leave {
+.fade-in-bottom-leave-active {
     transform: translate3d(0, 100%, 0);
 }
 

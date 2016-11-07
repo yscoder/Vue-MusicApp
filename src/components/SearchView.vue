@@ -11,40 +11,43 @@
     }
 </style>
 <template>
-    <div class="search-view" id="search-view" transition="fade-in-left" transition-mode="out-in">
-        <header id="search-hd" class="m-hd">
-            <div class="flex-row">
-                <a href="javascript:;" class="m-hd-icon" v-link="{ path: '/' }" v-waves.circle>
-                    <i class="icon icon-lg icon-prev"></i>
-                </a>
-                <div class="flex-col m-key-wrap">
-                    <input type="text" class="m-key" v-model="key" placeholder="歌名 艺人 专辑">
-                    <a href="javascript:;" class="m-key-icon" @click="search" v-waves.circle>
-                        <i class="icon icon-search icon-lg"></i>
-                    </a>
+    <transition name="fade-in-left" mode="out-in">
+        <div class="search-view" id="search-view">
+            <header id="search-hd" class="m-hd">
+                <div class="flex-row">
+                    <router-link to="/">
+                        <div class="m-hd-icon" v-waves.circle>
+                            <i class="icon icon-lg icon-prev"></i>
+                        </div>
+                    </router-link>
+                    <div class="flex-col m-key-wrap">
+                        <input type="text" class="m-key" v-model="key" placeholder="歌名 艺人 专辑">
+                        <a href="javascript:;" class="m-key-icon" @click="search" v-waves.circle>
+                            <i class="icon icon-search icon-lg"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </header>
-        <search-list :search-list="searchList"></search-list>
-    </div>
-
+            </header>
+            <search-list :search-list="searchList"></search-list>
+        </div>
+    </transition>
 </template>
 
 <script>
-var List = require('./SearchList');
+import List from './SearchList'
 
-module.exports = {
-    data: function () {
+export default {
+    data () {
         return {
             key: '曾经的你',
             searchList: []
         }
     },
     components: {
-        'search-list': List
+        searchList: List
     },
     methods: {
-        search: function () {
+        search () {
 
             if(!this.key.trim()) {
                 return;
@@ -52,11 +55,11 @@ module.exports = {
 
             console.log(this.key);
 
-            this.$http.get('/search/' + this.key + '/1').then(function(res){
+            this.$http.get('/search/' + this.key + '/1').then(res => {
 
                 this.searchList = res.data.list;
 
-            }, function (res) {
+            }, res => {
                 console.error('error: ' + res.status);
             });
         }

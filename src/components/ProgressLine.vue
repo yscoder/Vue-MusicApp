@@ -1,12 +1,19 @@
 <template>
-    <div class="progress-line primary" :style="{ width: running + '%' }"></div>
-    <div class="progress-line" :style="{ width: total + '%' }"></div>
+    <div class="progress-line" :style="{ width: total + '%' }">
+        <div class="progress-line primary" :style="{ width: running + '%' }"></div>
+    </div>
 </template>
 <script>
-module.exports = {
+export default {
     props: {
-        running: Number,
-        total: Number
+        running: {
+            type: Number,
+            default: 0
+        },
+        total: {
+            type: Number,
+            default: 0
+        }
     }
-};
+}
 </script>

@@ -1,11 +1,11 @@
 module.exports = {
     addPlayList: function(store, song) {
-        store.dispatch('PUSHSONG', song);
+        store.commit('PUSHSONG', song);
     },
     cutSongByIndex: function(store, index) {
-        store.dispatch('CUTSONG', index);
+        store.commit('CUTSONG', index);
     },
-    NextSong: function(store, mode) {
+    nextSong: function(store, mode) {
         var len = store.state.playList.length,
             index = store.state.songIndex;
 
@@ -19,6 +19,6 @@ module.exports = {
                 index = Math.floor((Math.random() * (len - 1)) + 1);
                 break;
         }
-        store.dispatch('CUTSONG', index);
+        store.commit('CUTSONG', index);
     }
 };

@@ -1,24 +1,24 @@
-var Vue = require('vue');
-var VueRouter = require('vue-router');
-var App = require('./components/App');
-var Search = require('./components/SearchView');
-var Main = require('./components/MainView');
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import App from './components/App'
+import Search from './components/SearchView'
+import Main from './components/MainView'
+import Vaves from 'vue-directive-waves'
+import VueResource from 'vue-resource'
 
-Vue.use(require('vue-directive-waves'));
-Vue.use(require('vue-resource'));
-Vue.use(VueRouter);
+Vue.use(Vaves)
+Vue.use(VueResource)
+Vue.use(VueRouter)
 
-var router = new VueRouter({
-    transitionOnLoad: true
-});
+const router = new VueRouter({
+    routes: [
+        { path: '/', component: Main },
+        { path: '/search', component: Search }
+    ]
+})
 
-router.map({
-    '/': {
-        component: Main
-    },
-    '/search': {
-        component: Search
-    }
-});
-
-router.start(App, '#app');
+new Vue({
+    el: '#app',
+    router: router,
+    render: h => h(App)
+})
