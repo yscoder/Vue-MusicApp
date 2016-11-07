@@ -3,6 +3,10 @@
 @import 'icon';
 @import '1px';
 
+html {
+    background: #fafafa
+}
+
 .@{namespace} {
 
     // header
@@ -70,7 +74,7 @@
         bottom: 0;
         z-index: 66;
         width: 100%;
-        height: 56px;
+        height: 40px;
         background: #fff;
 
         .container {
@@ -79,16 +83,15 @@
     }
 
     &-pic-s {
-        width: 56px;
-        height: 56px;
-        margin-right: @g-margin;
+        width: 40px;
+        height: 40px;
+        margin-right: @g-margin / 2;
         overflow: hidden;
 
     }
 
     &-txt {
-        padding: 8px 0;
-        line-height: 1.6;
+        padding: 5px 0;
         .singer {
             color: @color-gray;
             font-size: .12rem;
@@ -99,8 +102,8 @@
 
         button {
             border: none;
-            width: 56px;
-            height: 56px;
+            width: 40px;
+            height: 40px;
             color: @color-gray;
             text-align: center;
             background: #fff;
@@ -116,9 +119,8 @@
         width: 100%;
         height: 100%;
         max-height: 100%;
-        padding: 56px 0 55px;
+        padding: 56px 0 40px;
         overflow-y: auto;
-        background: #fcfcfc;
     }
 
     &-list-item {
@@ -142,19 +144,19 @@
         &:after {
             position: absolute;
             top: 0;
-            left: @g-margin;
+            left: 0;
             content: attr(data-index);
-            width: 20px;
+            width: 48px;
             line-height: 62px;
             text-align: center;
-            font-size: .24rem;
+            font-size: .2rem;
             color: @color-gray;
         }
 
         .container {
-            margin-left: 52px;
+            margin-left: 48px;
             margin-right: 0;
-            padding: 8px 52px 8px 0;
+            padding: 8px 48px 8px 0;
             height: auto;
             line-height: 1.7;
             font-size: .15rem;
@@ -189,15 +191,9 @@
     transition: width 1s ease;
 
     &.primary {
-        background: @color-primary-dark;
+        background: @color-primary;
         z-index: 2;
     }
-}
-
-.fade-in-left-enter-active,
-.fade-out-left-enter-active,
-.fade-in-bottom-enter-active {
-    transition: all .4s ease;
 }
 
 .fade-in-left-enter,
@@ -215,6 +211,18 @@
 .fade-in-bottom-enter,
 .fade-in-bottom-leave-active {
     transform: translate3d(0, 100%, 0);
+    box-shadow: none;
 }
 
+
+.fade-in-left-leave-active,
+.fade-out-left-enter-active,
+.fade-in-bottom-enter-active,
+.fade-in-bottom-leave-active {
+    transition: transform .2s ease;
+}
+.fade-in-left-enter-active,
+.fade-out-left-leave-active {
+    transition: transform .2s ease;
+}
 

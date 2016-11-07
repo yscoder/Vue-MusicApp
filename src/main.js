@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 import App from './components/App'
 import Search from './components/SearchView'
 import Main from './components/MainView'
-import Vaves from 'vue-directive-waves'
+import Waves from 'vue-directive-waves'
 import VueResource from 'vue-resource'
 
-Vue.use(Vaves)
+Vue.use(Waves)
 Vue.use(VueResource)
 Vue.use(VueRouter)
 
@@ -19,6 +19,6 @@ const router = new VueRouter({
 
 new Vue({
     el: '#app',
-    router: router,
+    router,
     render: h => h(App)
 })

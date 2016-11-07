@@ -16,16 +16,8 @@ export default {
     },
     methods: {
         onItemClick (item) {
-            this.$http.get('/song/' + item.id).then(res => {
-                console.log('url:' + res.data);
-                item.url = res.data;
 
-                this.$store.dispatch('addPlayList', item)
-
-            }, res => {
-                console.error('error: ' + res.status);
-            });
-
+            this.$store.dispatch('addPlayList', item)
         }
     }
 }

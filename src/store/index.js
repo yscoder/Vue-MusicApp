@@ -5,16 +5,23 @@ import actions from './actions'
 
 Vue.use(Vuex)
 
-module.exports = new Vuex.Store({
+export default new Vuex.Store({
     state: {
         songIndex: 0,
-        playList: []
+        playList: [],
+        searchList: []
     },
     mutations,
     actions,
     getters: {
         currentSong(state) {
             return state.playList[state.songIndex]
+        },
+        playList(state) {
+            return state.playList
+        },
+        searchList(state) {
+            return state.searchList
         }
     }
 })

@@ -21,7 +21,8 @@
                         </div>
                     </router-link>
                     <div class="flex-col m-key-wrap">
-                        <input type="text" class="m-key" v-model="key" placeholder="歌名 艺人 专辑">
+                        <input type="text" class="m-key" placeholder="歌名 艺人 专辑" 
+                            v-model="key" @keyup.enter="search">
                         <a href="javascript:;" class="m-key-icon" @click="search" v-waves.circle>
                             <i class="icon icon-search icon-lg"></i>
                         </a>
@@ -39,8 +40,7 @@ import List from './SearchList'
 export default {
     data () {
         return {
-            key: '曾经的你',
-            searchList: []
+            key: '曾经的你'
         }
     },
     components: {
@@ -49,20 +49,17 @@ export default {
     methods: {
         search () {
 
-            if(!this.key.trim()) {
-                return;
-            }
+            if(!this.key.trim()) return
 
-            console.log(this.key);
+            console.log(this.key)
 
-            this.$http.get('/search/' + this.key + '/1').then(res => {
-
-                this.searchList = res.data.list;
-
-            }, res => {
-                console.error('error: ' + res.status);
-            });
+            this.$store.dispatch('search', this.key)
+        }
+    },
+    computed: {
+        searchList() {
+            return this.$store.getters.searchList
         }
     }
-};
+}
 </script>

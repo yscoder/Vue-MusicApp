@@ -3,17 +3,17 @@
         <div class="m-player ratina-bd bd-t" id="player" v-if="currentSong">
             <div class="">
                 <div class="m-pic-s fl">
-                    <img src="http://placeholder.qiniudn.com/56x56/ccc/fff" v-waves.block>
+                    <img src="//placeholder.qiniudn.com/40x40/ccc/fff" v-waves.block>
                 </div>
                 <div class="m-act flex-row fr">
                     <button class="flex-col" @click="mode" v-waves.circle>
-                        <i class="icon icon-lg" :class="'icon-mode-' + modeIcon"></i>
+                        <i class="icon" :class="'icon-mode-' + modeIcon"></i>
                     </button>
                     <button class="flex-col" @click="play" v-waves.circle>
-                        <i class="icon icon-lg" :class="[playState ? 'icon-pause' : 'icon-play']"></i>
+                        <i class="icon" :class="[playState ? 'icon-pause' : 'icon-play']"></i>
                     </button>
                     <button class="flex-col" @click="next" v-waves.circle>
-                        <i class="icon icon-lg icon-next "></i>
+                        <i class="icon icon-next"></i>
                     </button>
                 </div>
                 <div class="m-txt oh">
@@ -21,8 +21,16 @@
                     <div class="singer ellipsis">{{currentSong ? currentSong.singer : ''}}</div>
                 </div>
 
-                <audio autoplay ref:music @play="playStateChange" @pause="playStateChange" @ended="playEnded" @progress="progress" @timeupdate="timeupdate">
-                    <source type="audio/mpeg" :src="currentSong.url" v-if="currentSong">
+                <audio autoplay 
+                    v-if="currentSong" 
+                    ref="music" 
+                    :src="currentSong.url" 
+                    @play="playStateChange" 
+                    @pause="playStateChange" 
+                    @ended="playEnded" 
+                    @progress="progress" 
+                    @timeupdate="timeupdate">
+                    <source type="audio/mpeg" :src="currentSong.url">
                 </audio>
             </div>
             <progress-line :running="running" :total="total"></progress-line>
@@ -31,7 +39,6 @@
 </template>
 <script>
 import ProgressLine from './ProgressLine'
-import { mapGetters } from 'vuex'
 
 export default {
     data(){
@@ -39,8 +46,7 @@ export default {
             playMode: 0,
             running: 0,
             total: 0,
-            playState: false,
-            currentSong: null
+            playState: false
         }
     },
     components: {
@@ -49,68 +55,70 @@ export default {
     methods: {
         play () {
             // play or pause
-            this.playState ? this.$refs.music.pause() : this.$refs.music.play();
+            this.playState ? this.$refs.music.pause() : this.$refs.music.play()
         },
         next () {
             // next
             // 根据 playMode 切换下一首
-            var $music = this.$refs.music;
+            var $music = this.$refs.music
 
-            $music.pause();
-            $music.src = '';
+            $music.pause()
+            $music.src = ''
 
-            console.log('mode:' + this.playMode);
+            console.log('mode:' + this.playMode)
 
             this.$store.dispatch('nextSong', this.playMode)
 
-            $music.src = this.currentSong.url;
-            $music.play();
+            // src 已由数据响应触发更新，以下会造成多余请求
+            //$music.src = this.currentSong.url
+            //$music.play()
         },
         mode () {
             // playMode
-            var cur = this.playMode;
+            var cur = this.playMode
 
-            this.playMode = cur + 1 === 3 ? 0 : cur + 1;
+            this.playMode = cur + 1 === 3 ? 0 : cur + 1
 
             // playMode 为 1 设置循环播放
-            this.$refs.music.loop = this.playMode === 1;
+            this.$refs.music.loop = this.playMode === 1
         },
         playEnded () {
             // 播放结束直接调用下一首
-            console.log('next');
-            this.next();
+            console.log('next')
+            this.next()
         },
         playStateChange (e) {
             // 播放状态改变
-            console.log(e.type);
-            this.playState = e.type === 'play';
+            console.log(e.type)
+            this.playState = e.type === 'play'
         },
         progress (event) {
             // 缓冲
             // buffered 已缓冲长度
             // duration 资源长度
             var $music = event.target,
-                buffered = $music.buffered;
+                buffered = $music.buffered
 
-            if(!buffered.length) return;
+            if(!buffered.length) return
 
-            this.total = Math.round(buffered.end(buffered.length - 1) / $music.duration * 100);
+            this.total = Math.round(buffered.end(buffered.length - 1) / $music.duration * 100)
 
         },
         timeupdate (event) {
             // 播放中
             // played 已播放长度
-            var $music = event.target;
-            this.running = Math.round($music.currentTime / $music.duration * 100);
+            var $music = event.target
+            this.running = Math.round($music.currentTime / $music.duration * 100)
         }
     },
     computed: {
         modeIcon () {
-            return ['loop', 'single', 'random'][this.playMode];
+            return ['loop', 'single', 'random'][this.playMode]
         },
-        ...mapGetters([
-            'currentSong'
-        ])
+        currentSong() {
+            // console.log(this.$store.getters.currentSong)
+            return this.$store.getters.currentSong
+        }
     }
 }
 </script>

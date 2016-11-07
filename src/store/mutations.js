@@ -1,10 +1,11 @@
-module.exports = {
-    PUSHSONG: function(state, song) {
-        !state.playList.some(function(item, i) {
-            return item.id === song.id;
-        }) && state.playList.push(song);
+export default {
+    PUSHSONG(state, song) {
+        !state.playList.some(item => item.id === song.id) && state.playList.push(song)
     },
-    CUTSONG: function(state, index) {
-        state.songIndex = index;
+    CUTSONG(state, index) {
+        state.songIndex = index
+    },
+    SEARCHLIST(state, data) {
+        state.searchList = data
     }
 }
