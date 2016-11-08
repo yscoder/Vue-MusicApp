@@ -5,30 +5,32 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // add hot-reload related code to entry chunks
-Object.keys(baseConfig.entry).forEach(function (name) {
-  baseConfig.entry[name] = ['./config/dev-client'].concat(baseConfig.entry[name])
+Object.keys(baseConfig.entry).forEach(function(name) {
+    baseConfig.entry[name] = ['./config/dev-client'].concat(baseConfig.entry[name])
 })
 
 module.exports = merge(baseConfig, {
-  // eval-source-map is faster for development
-  devtool: '#eval-source-map',
-  output: {
-    // necessary for the html plugin to work properly
-    // when serving the html from in-memory
-    publicPath: '/'
-  },
-  plugins: [
-    // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin("[name].css"),
-    new webpack.NoErrorsPlugin(),
-    // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      title: 'dev',
-      filename: 'index.html',
-      template: 'src/index.html',
-      inject: true
-    })
-  ]
+    devtool: '#eval-source-map',
+    output: {
+        // necessary for the html plugin to work properly
+        // when serving the html from in-memory
+        publicPath: '/'
+    },
+    vue: {
+        loaders: {
+            css: 'vue-style!css',
+            less: 'vue-style!css!less'
+        }
+    },
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin("[name].css"),
+        new webpack.NoErrorsPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src/index.html',
+            inject: true
+        })
+    ]
 })
