@@ -15,8 +15,7 @@ export default {
         searchList: Array
     },
     methods: {
-        onItemClick (item) {
-
+        onItemClick(item) {
             this.$store.dispatch('addPlayList', item)
         }
     }

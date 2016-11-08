@@ -41,7 +41,7 @@
 import ProgressLine from './ProgressLine'
 
 export default {
-    data(){
+    data() {
         return {
             playMode: 0,
             running: 0,
@@ -53,11 +53,11 @@ export default {
         ProgressLine
     },
     methods: {
-        play () {
+        play() {
             // play or pause
             this.playState ? this.$refs.music.pause() : this.$refs.music.play()
         },
-        next () {
+        next() {
             // next
             // 根据 playMode 切换下一首
             var $music = this.$refs.music
@@ -70,10 +70,10 @@ export default {
             this.$store.dispatch('nextSong', this.playMode)
 
             // src 已由数据响应触发更新，以下会造成多余请求
-            //$music.src = this.currentSong.url
-            //$music.play()
+            // $music.src = this.currentSong.url
+            // $music.play()
         },
-        mode () {
+        mode() {
             // playMode
             var cur = this.playMode
 
@@ -82,37 +82,38 @@ export default {
             // playMode 为 1 设置循环播放
             this.$refs.music.loop = this.playMode === 1
         },
-        playEnded () {
+        playEnded() {
             // 播放结束直接调用下一首
             console.log('next')
             this.next()
         },
-        playStateChange (e) {
+        playStateChange(e) {
             // 播放状态改变
             console.log(e.type)
             this.playState = e.type === 'play'
         },
-        progress (event) {
+        progress(event) {
             // 缓冲
             // buffered 已缓冲长度
             // duration 资源长度
-            var $music = event.target,
-                buffered = $music.buffered
 
-            if(!buffered.length) return
+            let $music = event.target
+            let buffered = $music.buffered
+
+            if (!buffered.length) return
 
             this.total = Math.round(buffered.end(buffered.length - 1) / $music.duration * 100)
-
         },
-        timeupdate (event) {
+        timeupdate(event) {
             // 播放中
             // played 已播放长度
-            var $music = event.target
+
+            let $music = event.target
             this.running = Math.round($music.currentTime / $music.duration * 100)
         }
     },
     computed: {
-        modeIcon () {
+        modeIcon() {
             return ['loop', 'single', 'random'][this.playMode]
         },
         currentSong() {

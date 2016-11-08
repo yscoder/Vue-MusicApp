@@ -23,10 +23,15 @@ module.exports = merge(baseConfig, {
         }
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"development"'
+            }
+        }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin("[name].css"),
-        new webpack.NoErrorsPlugin(),
+        // new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'src/index.html',

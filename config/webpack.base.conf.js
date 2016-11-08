@@ -23,6 +23,17 @@ module.exports = {
         fallback: [path.join(__dirname, '../node_modules')]
     },
     module: {
+        preLoaders: [{
+            test: /\.vue$/,
+            loader: 'eslint',
+            include: projectRoot,
+            exclude: /node_modules/
+        }, {
+            test: /\.js$/,
+            loader: 'eslint',
+            include: projectRoot,
+            exclude: /node_modules/
+        }],
         loaders: [{
             test: /\.vue$/,
             loader: 'vue'
@@ -49,16 +60,19 @@ module.exports = {
             }
         }]
     },
-    postcss: [autoprefixer({
-        browsers: ['last 3 versions']
-    })],
-    babel: {
-        presets: ['es2015', 'stage-2'],
-        plugins: ['transform-runtime']
-    },
     vue: {
         postcss: [autoprefixer({
             browsers: ['last 3 versions']
         })]
-    }
+    },
+    eslint: {
+        formatter: require('eslint-friendly-formatter')
+    },
+    babel: {
+        presets: ['es2015', 'stage-2'],
+        plugins: ['transform-runtime']
+    },
+    postcss: [autoprefixer({
+        browsers: ['last 3 versions']
+    })]
 }

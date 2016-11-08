@@ -38,7 +38,7 @@
 import List from './SearchList'
 
 export default {
-    data () {
+    data() {
         return {
             key: '曾经的你'
         }
@@ -47,9 +47,8 @@ export default {
         searchList: List
     },
     methods: {
-        search () {
-
-            if(!this.key.trim()) return
+        search() {
+            if (!this.key.trim()) return
 
             console.log(this.key)
 

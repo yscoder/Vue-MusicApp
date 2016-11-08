@@ -11,7 +11,7 @@
                     <div class="ellipsis sub">
                         {{item.singer}} - {{item.album||'未知专辑'}}
                     </div>
-                    <span class="icon icon-more icon-lg" v-waves.circle                                @click.stop.prevent="contextMenu(item)"></span>
+                    <span class="icon icon-more icon-lg" v-waves.circle @click.stop.prevent="contextMenu(item)"></span>
                 </a>
             </li>
 
