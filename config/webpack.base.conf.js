@@ -50,7 +50,7 @@ module.exports = {
         }]
     },
     postcss: [autoprefixer({
-        browsers: ['last 2 versions']
+        browsers: ['last 3 versions']
     })],
     babel: {
         presets: ['es2015', 'stage-2'],
@@ -58,7 +58,7 @@ module.exports = {
     },
     vue: {
         postcss: [autoprefixer({
-            browsers: ['last 20 versions']
+            browsers: ['last 3 versions']
         })]
     }
 }
