@@ -4,7 +4,7 @@
             <a href="//imys.net" target="_blank" class="m-hd-icon" v-waves>
                 <i class="icon icon-music icon-lg"></i>
             </a>
-            <div class="flex-col ellipsis">Just Music</div>
+            <div class="flex-col ellipsis title">Just Music</div>
             <router-link to="/search">
                 <div class="m-hd-icon" v-waves.circle>
                     <i class="icon icon-search icon-lg"></i>

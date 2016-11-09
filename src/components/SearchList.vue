@@ -11,12 +11,14 @@
 </template>
 <script>
 export default {
-    props: {
-        searchList: Array
-    },
     methods: {
         onItemClick(item) {
             this.$store.dispatch('addPlayList', item)
+        }
+    },
+    computed: {
+        searchList() {
+            return this.$store.getters.searchList
         }
     }
 }

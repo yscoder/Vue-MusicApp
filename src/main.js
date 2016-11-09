@@ -17,7 +17,7 @@ const router = new VueRouter({
     ]
 })
 
-export default new Vue({
+new Vue({
     el: '#app',
     router,
     render: h => h(App)

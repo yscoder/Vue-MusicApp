@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // add hot-reload related code to entry chunks
-Object.keys(baseConfig.entry).forEach(function(name) {
+Object.keys(baseConfig.entry).forEach(function (name) {
     baseConfig.entry[name] = ['./config/dev-client'].concat(baseConfig.entry[name])
 })
 
@@ -15,12 +15,6 @@ module.exports = merge(baseConfig, {
         // necessary for the html plugin to work properly
         // when serving the html from in-memory
         publicPath: '/'
-    },
-    vue: {
-        loaders: {
-            css: 'vue-style!css',
-            less: 'vue-style!css!less'
-        }
     },
     plugins: [
         new webpack.DefinePlugin({

@@ -61,6 +61,10 @@ module.exports = {
         }]
     },
     vue: {
+        loaders: {
+            css: 'vue-style!css',
+            less: 'vue-style!css!less'
+        },
         postcss: [autoprefixer({
             browsers: ['last 3 versions']
         })]

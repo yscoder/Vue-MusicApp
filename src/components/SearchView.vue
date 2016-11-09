@@ -6,7 +6,6 @@
         width: 100%;
         height: 100%;
         max-height: 100%;
-        background: #fff;
         z-index: 12;
     }
 </style>
@@ -29,7 +28,7 @@
                     </div>
                 </div>
             </header>
-            <search-list :search-list="searchList"></search-list>
+            <search-list></search-list>
         </div>
     </transition>
 </template>
@@ -40,7 +39,7 @@ import List from './SearchList'
 export default {
     data() {
         return {
-            key: '曾经的你'
+            key: ''
         }
     },
     components: {
@@ -53,11 +52,6 @@ export default {
             console.log(this.key)
 
             this.$store.dispatch('search', this.key)
-        }
-    },
-    computed: {
-        searchList() {
-            return this.$store.getters.searchList
         }
     }
 }

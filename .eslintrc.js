@@ -18,8 +18,12 @@ module.exports = {
         'arrow-parens': 0,
         // allow async-await
         'generator-star-spacing': 0,
+        // 
         'space-before-function-paren': [0, "always"],
+        // 4 space indent
         'indent': [2, 4, { "SwitchCase": 1 }],
+        // disable no-new
+        'no-new': 0,
         // allow debugger during development
         'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
     }

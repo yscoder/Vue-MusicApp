@@ -4,9 +4,9 @@
 
             <li class="m-list-item m-play-item" v-waves.block 
                 v-for="(item, index) in playList" 
-                :data-index="index >= 9 ? index + 1 : '0' + (index + 1)">
+                :data-index="(index >= 9 ? index + 1 : '0' + (index + 1))">
 
-                <a href="javascript:;" class="container ratina-bd bd-b" @click="cutSong(index)">
+                <a class="container ratina-bd bd-b" @click="cutSong(index)">
                     <div class="ellipsis">{{item.name}}</div>
                     <div class="ellipsis sub">
                         {{item.singer}} - {{item.album||'未知专辑'}}
@@ -20,22 +20,17 @@
 </template>
 <script>
 export default {
-    data() {
-        return {
-            playList: []
-        }
-    },
     methods: {
         cutSong(index) {
             console.log('cutSongByIndex', index)
             this.$store.dispatch('cutSongByIndex', index)
         },
-        contextMenu (item) {
+        contextMenu(item) {
             console.log('more')
         }
     },
     computed: {
-        playList () {
+        playList() {
             return this.$store.getters.playList
         }
     }
