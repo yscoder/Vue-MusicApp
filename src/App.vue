@@ -1,22 +1,19 @@
 <style lang="less">
-@import '../less/style';
+@import './less/style';
 </style>
 <template>
     <div id="app">
         <router-view></router-view>
-        <music-ctrl></music-ctrl>
+        <player></player>
     </div>
 </template>
 
 <script>
-import Player from './Player'
-import store from '../store'
+import Player from './components/Player'
 
 export default {
     components: {
-        musicCtrl: Player
-    },
-    store
+        Player
+    }
 }
-
 </script>

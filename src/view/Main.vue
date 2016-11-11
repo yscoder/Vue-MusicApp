@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Header from './Header'
-import List from './PlayList'
+import Header from 'components/Header'
+import List from 'components/PlayList'
 
 export default {
     components: {
