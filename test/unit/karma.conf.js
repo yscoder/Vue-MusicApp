@@ -7,6 +7,7 @@ var path = require('path')
 var merge = require('webpack-merge')
 var baseConfig = require('../../config/webpack.base.conf')
 var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var projectRoot = path.resolve(__dirname, '../../')
 
 var webpackConfig = merge(baseConfig, {
@@ -26,7 +27,9 @@ var webpackConfig = merge(baseConfig, {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': '"testing"'
-        })
+        }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new ExtractTextPlugin('[name].css')
     ]
 })
 

@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import router from 'src/router'
+import Waves from 'vue-directive-waves'
+
+Vue.use(Waves)
 
 let id = 0
 
